@@ -1,25 +1,12 @@
 import { useCallback, useEffect } from 'react'
-import { StatusBar } from 'expo-status-bar'
-import { ImageBackground, Text, TouchableOpacity, View } from 'react-native'
-import { styled } from 'nativewind'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { makeRedirectUri, useAuthRequest } from 'expo-auth-session'
 import * as SecureStore from 'expo-secure-store'
 
-import {
-  useFonts,
-  Roboto_400Regular as Roboto400Regular,
-  Roboto_700Bold as Roboto700Bold,
-} from '@expo-google-fonts/roboto'
-import { BaiJamjuree_700Bold as BaiJamjuree700Bold } from '@expo-google-fonts/bai-jamjuree'
-
-import blurBg from '../src/assets/bg-blur.png'
-import Stripes from '../src/assets/stripes.svg'
 import NlwLogo from '../src/assets/nlw-logo.svg'
 
 import { api } from '../src/lib/api'
 import { useRouter } from 'expo-router'
-
-const StyledStripes = styled(Stripes)
 
 const CLIENT_ID = '9a1dda599fb22cec73ba'
 
@@ -31,12 +18,6 @@ const discovery = {
 
 export default function App() {
   const router = useRouter()
-
-  const [hasLoadedFonts] = useFonts({
-    Roboto400Regular,
-    Roboto700Bold,
-    BaiJamjuree700Bold,
-  })
 
   const [, response, signInWithGithub] = useAuthRequest(
     {
@@ -69,18 +50,8 @@ export default function App() {
     }
   }, [handleGithubOAuthCode, response])
 
-  if (!hasLoadedFonts) return null
-
   return (
-    <ImageBackground
-      source={blurBg}
-      className="relative flex-1 items-center bg-gray-900 px-8 py-10"
-      imageStyle={{ position: 'absolute', left: '-100%' }}
-    >
-      <StatusBar style="light" translucent />
-
-      <StyledStripes className="absolute left-2 h-screen" />
-
+    <View className="flex-1 items-center px-8 py-10">
       <View className="flex-1 items-center justify-center gap-7">
         <NlwLogo />
 
@@ -108,6 +79,6 @@ export default function App() {
       <Text className="text-center font-body text-sm leading-relaxed text-gray-200">
         Feito com 💜 no NLW da Rocketseat
       </Text>
-    </ImageBackground>
+    </View>
   )
 }
