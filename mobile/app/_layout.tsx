@@ -47,11 +47,12 @@ function Layout() {
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: 'transparent' },
+          animation: 'slide_from_right',
         }}
       >
         <Stack.Screen name="index" redirect={isAuthenticated} />
-        <Stack.Screen name="new" />
         <Stack.Screen name="memories" />
+        <Stack.Screen name="new" />
       </Stack>
     </ImageBackground>
   )
